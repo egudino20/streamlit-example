@@ -14,24 +14,24 @@ try:
 except ModuleNotFoundError:
     pass
 
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import NoSuchElementException
+#from selenium import webdriver
+#from selenium.webdriver.common.keys import Keys
+#from selenium.webdriver.common.action_chains import ActionChains
+#from selenium.webdriver.chrome.options import Options
+#from selenium.common.exceptions import NoSuchElementException
 
 # bot automation
-from PIL import Image
-import base64
-import hashlib
+#from PIL import Image
+#import base64
+#import hashlib
 import os
 import re
 import json
-import requests
-import redis
-from requests.auth import AuthBase, HTTPBasicAuth
-from requests_oauthlib import OAuth2Session, TokenUpdated
-from flask import Flask, request, redirect, session, url_for, render_template
+#import requests
+#import redis
+#from requests.auth import AuthBase, HTTPBasicAuth
+#from requests_oauthlib import OAuth2Session, TokenUpdated
+#from flask import Flask, request, redirect, session, url_for, render_template
 
 
 TRANSLATE_DICT = {'Jan': 'Jan',
