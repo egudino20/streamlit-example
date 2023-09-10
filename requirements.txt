@@ -4,3 +4,4 @@ streamlit
 mplsoccer
 selenium
 highlight_text
+adjustText
