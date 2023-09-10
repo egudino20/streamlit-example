@@ -1,9 +1,60 @@
 # Import your modules here
 
+# data visualization
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+from mplsoccer import Pitch, VerticalPitch, FontManager
+import matplotlib.colors as mcolors
+from matplotlib.colors import to_rgba
+from matplotlib.patches import ConnectionPatch
+import matplotlib.gridspec as gridspec
+import seaborn as sns
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+import matplotlib.image as mpimg
+import matplotlib.ticker as ticker
+import matplotlib.patheffects as path_effects
+from mplsoccer import PyPizza, add_image, FontManager
+from matplotlib.colors import Normalize
+import matplotlib.font_manager as fm
+import matplotlib.colors as mcolors
+
+# web scraping
+from selenium import webdriver
+
+# text and annotation
+from itertools import combinations
+from highlight_text import fig_text, ax_text
+from highlight_text import fig_text, ax_text, HighlightText
+from adjustText import adjust_text
+
+# machine learning / statiscal analysis
+from scipy import stats
+from scipy.stats import poisson
+from scipy.interpolate import interp1d, make_interp_spline
+from scipy.interpolate import interp2d
+from scipy.ndimage import gaussian_filter
+from scipy.interpolate import interp2d
+import pickle
+from math import pi
+
+# file handling and parsing
+import os
+import json
+import glob
+
+# Images
+from PIL import Image
+import requests
+from io import BytesIO
+
+# other
+import datetime
+
 import os
 import json
 import pandas as pd
 import streamlit as st
+import numpy as np
 
 def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
 
