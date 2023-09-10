@@ -1,13 +1,123 @@
-# Import your module here
-from visuals import team_performance
-#from visuals import load_individual_match_team_dfs, generate_match_week_zone_control_viz, generate_team_zone_control_viz
-#from visuals import generate_all_teams_zone_control, process_and_export_season_match_data, load_season_match_team_dfs,  process_and_export_match_data, load_individual_match_team_dfs
+# Import your modules here
 
 import os
 import json
 import pandas as pd
 import streamlit as st
-#from bs4 import BeautifulSoup as soup
+
+def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
+
+    # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
+    plt.rcParams['font.family'] = 'Roboto'
+
+    title_font = 'Roboto'
+    body_font = 'Roboto'
+
+    main_folder = r"streamlit-example"
+
+    if web_app == True:
+
+        df = pd.read_csv(f'{main_folder}/Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
+
+    else:
+
+        df = pd.read_csv(f'Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
+        
+    df['yrAvg'] = df[metric_1].rolling(window=10).mean()
+    df['zrAvg'] = df[metric_2].rolling(window=10).mean()
+
+    background = '#1d2849'
+    text_color='w'
+    text_color_2='gray'
+    mpl.rcParams['xtick.color'] = text_color
+    mpl.rcParams['ytick.color'] = text_color
+
+    filler = 'grey'
+    primary = 'red'
+
+    # create figure and axes
+    fig, ax = plt.subplots(figsize=(12,6))
+    fig.set_facecolor(background)
+    ax.patch.set_facecolor(background)
+
+    # add grid
+    # ax.grid(ls='dotted', lw="0.5", color='lightgrey', zorder=1)
+
+    x = df.startDate
+    x = range(1,39)
+    y = df.yrAvg
+    z = df.zrAvg
+
+    ax.plot(x, y, color='#4B9CD3', alpha=0.9, lw=1, zorder=2,
+            label=f'Rolling 10 game {metric_1}', marker='o')
+    ax.plot(x, z, color='#39ff14', alpha=0.9, lw=1, zorder=3,
+           label=f'Rolling 10 game {metric_2}', marker='o')
+
+    # Add a dotted horizontal line at y=0
+    ax.axhline(y=0, color='gray', lw=1, linestyle='--', zorder=0)
+
+    # Add a legend to the plot with custom font properties and white text color
+    legend_font = fm.FontProperties(family='Roboto', weight='bold')
+    legend = plt.legend(prop=legend_font, loc='upper left', frameon=False)
+    plt.setp(legend.texts, color='white')  # Set legend text color to white
+
+    # add title and subtitle
+
+    df['startDate'] = df['startDate'].astype(str)
+    start_date = df['startDate'].unique()[0]
+    end_date = df['startDate'].unique()[37]
+
+    fig.text(0.12,1.115, "{}".format(team), 
+             fontsize=20, color=text_color, fontfamily=title_font, fontweight='bold')
+    fig.text(0.12,1.065, f"{league}", fontsize=14, 
+             color='white', fontfamily=title_font, fontweight='bold')
+    fig.text(0.12,1.015, f"All matches, {start_date} to {end_date}", fontsize=14, 
+             color='white', fontfamily=title_font, fontweight='bold')
+
+    ax.tick_params(axis='both', length=0)
+
+    spines = ['top', 'right', 'bottom', 'left']
+    for s in spines:
+        if s in ['top', 'right']:
+            ax.spines[s].set_visible(False)
+        else:
+            ax.spines[s].set_color(text_color)
+            
+    # Set the x-axis ticks to increment by 2
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(base=2)) 
+    for label in ax.get_xticklabels():
+        label.set_fontfamily(body_font)
+        label.set_fontproperties(fm.FontProperties(weight='bold'))
+    for label in ax.get_yticklabels():
+        label.set_fontfamily(body_font)
+        label.set_fontproperties(fm.FontProperties(weight='bold'))
+            
+    ax2 = fig.add_axes([0.05,0.99,0.08,0.08])
+    ax2.axis('off')
+
+    path = f'{main_folder}/Logos/{comp}/{team}.png'
+    ax_team = fig.add_axes([-0.02,0.99,0.175,0.175])
+    ax_team.axis('off')
+    im = plt.imread(path)
+    ax_team.imshow(im);
+
+    fig.text(0.05, -0.025, "Viz by @egudi_analysis | Data via Opta", fontsize=9,
+             fontfamily=body_font, fontweight='bold', color=text_color)
+
+    fig.text(0.05, -0.05, "Expected goals model trained on ~10k shots from the 2021/2022 EPL season.", fontsize=9,
+             fontfamily=body_font, fontweight='bold', color=text_color)
+
+    fig.text(0.05, -0.075, "Expected threat model by Karun Singh", fontsize=9,
+             fontfamily=body_font, fontweight='bold', color=text_color)
+
+    plt.tight_layout()
+
+    return fig
+
+    # save figure
+    #fig.savefig(f'{main_folder}/Output/{comp}/{season[5:]}/{team}-{start_date}-{end_date}', dpi=None, bbox_inches="tight")
+
+import pandas as pd
 
 def main():
     print("Current working directory:", os.getcwd())
