@@ -1,13 +1,13 @@
 # Import your module here
-from visuals import team_performance, process_and_export_match_data, load_individual_match_team_dfs
-from visuals import load_individual_match_team_dfs, generate_match_week_zone_control_viz, generate_team_zone_control_viz
-from visuals import generate_all_teams_zone_control, process_and_export_season_match_data, load_season_match_team_dfs
+from visuals import team_performance
+#from visuals import load_individual_match_team_dfs, generate_match_week_zone_control_viz, generate_team_zone_control_viz
+#from visuals import generate_all_teams_zone_control, process_and_export_season_match_data, load_season_match_team_dfs,  process_and_export_match_data, load_individual_match_team_dfs
 
 import os
 import json
 import pandas as pd
 import streamlit as st
-from bs4 import BeautifulSoup as soup
+#from bs4 import BeautifulSoup as soup
 
 def main():
     print("Current working directory:", os.getcwd())
