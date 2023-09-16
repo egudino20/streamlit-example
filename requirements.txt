@@ -1,7 +1,7 @@
 altair
 pandas
 streamlit
-mplsoccer
 selenium
 highlight_text
 adjustText
+mplsoccer
