@@ -1,4 +1,9 @@
 # Import your modules here
+import streamlit as st
+import os
+import json
+import pandas as pd
+import numpy as np
 
 # data visualization
 import matplotlib as mpl
@@ -49,12 +54,6 @@ from io import BytesIO
 
 # other
 import datetime
-
-import os
-import json
-import pandas as pd
-import streamlit as st
-import numpy as np
 
 def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
 
