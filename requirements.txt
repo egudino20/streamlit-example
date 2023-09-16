@@ -1,6 +1,7 @@
 streamlit
 altair
 pandas
+matplotlib
 mplsoccer
 selenium
 highlight_text
