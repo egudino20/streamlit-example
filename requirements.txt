@@ -3,8 +3,8 @@ altair
 pandas
 selenium
 bs4
-matplotlib==3.4.3
-mplsoccer
+matplotlib==3.8.0
+mplsoccer==1.2.1
 highlight_text
 adjustText
 tqdm
