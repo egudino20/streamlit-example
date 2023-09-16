@@ -1,9 +1,12 @@
 streamlit
 altair
 pandas
+selenium
+bs4
 matplotlib
 mplsoccer
-selenium
 highlight_text
 adjustText
+tqdm
+
 
