@@ -9,10 +9,10 @@ import datetime
 from datetime import datetime as dt
 import itertools
 import numpy as np
-try:
-    from tqdm import trange
-except ModuleNotFoundError:
-    pass
+#try:
+#    from tqdm import trange
+#except ModuleNotFoundError:
+#    pass
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
