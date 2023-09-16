@@ -1,7 +1,7 @@
 streamlit==1.26.0
 pandas==2.1.0
-matplotlib==3.8.0
-mplsoccer==1.2.1
+matplotlib>2.0.0
+mplsoccer>1.0.0
 adjustText==0.8
 altair==5.1.1
 attrs==23.1.0
