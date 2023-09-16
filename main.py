@@ -14,11 +14,11 @@ try:
 except ModuleNotFoundError:
     pass
 
-#from selenium import webdriver
-#from selenium.webdriver.common.keys import Keys
-#from selenium.webdriver.common.action_chains import ActionChains
-#from selenium.webdriver.chrome.options import Options
-#from selenium.common.exceptions import NoSuchElementException
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException
 
 # bot automation
 #from PIL import Image
