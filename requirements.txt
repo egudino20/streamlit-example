@@ -3,7 +3,7 @@ altair
 pandas
 selenium
 bs4
-matplotlib
+matplotlib==3.4.3
 mplsoccer
 highlight_text
 adjustText
