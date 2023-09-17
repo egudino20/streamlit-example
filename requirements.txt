@@ -5,3 +5,4 @@ selenium
 requests
 highlight_text
 adjustText
+scipy
