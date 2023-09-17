@@ -13,7 +13,7 @@ import matplotlib.colors as mcolors
 from matplotlib.colors import to_rgba
 from matplotlib.patches import ConnectionPatch
 import matplotlib.gridspec as gridspec
-import seaborn as sns
+#import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.image as mpimg
 import matplotlib.ticker as ticker
