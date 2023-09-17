@@ -197,7 +197,7 @@ def main():
     }
     league_folder = league_to_comp[country]
 
-    main_folder = "streamlit-example"
+    main_folder = r"streamlit-example"
 
     url = "https://storage.googleapis.com/matches-data/matches_data.json"
 
