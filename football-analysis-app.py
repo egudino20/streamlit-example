@@ -8,7 +8,7 @@ import numpy as np
 # data visualization
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from mplsoccer import Pitch, VerticalPitch, FontManager
+#from mplsoccer import Pitch, VerticalPitch, FontManager
 import matplotlib.colors as mcolors
 from matplotlib.colors import to_rgba
 from matplotlib.patches import ConnectionPatch
@@ -18,7 +18,7 @@ from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.image as mpimg
 import matplotlib.ticker as ticker
 import matplotlib.patheffects as path_effects
-from mplsoccer import PyPizza, add_image, FontManager
+#from mplsoccer import PyPizza, add_image, FontManager
 from matplotlib.colors import Normalize
 import matplotlib.font_manager as fm
 import matplotlib.colors as mcolors
