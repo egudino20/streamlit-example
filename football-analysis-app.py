@@ -206,14 +206,14 @@ def main():
         if response.status_code == 404:
             st.error("Resource not found. Please check the URL.")
         else:
-            matches_data = response.json
+            matches_data = response.json()
     except requests.exceptions.RequestException as e:
         st.error(f"Connection error: {e}")
 
     # league identifiers
-    league = f"{matches_data['region']} {matches_data['league']} {matches_data['season']}"
+    league = f"{matches_data[0]['region']} {matches_data[0]['league']} {matches_data[0]['season']}"
 
-    season = matches_data['season'] 
+    season = matches_data[0]['season'] 
 
     #events_df = pd.read_csv(f'{main_folder}/Data/{league_folder}/{season[5:]}/raw-season-data/{league_folder}-{date_str}.csv', low_memory=False)
     #events_df.drop('Unnamed: 0', axis=1, inplace=True)
