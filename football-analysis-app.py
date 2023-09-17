@@ -197,7 +197,7 @@ def main():
     }
     league_folder = league_to_comp[country]
 
-    url = "https://storage.cloud.google.com/matches-data/matches_data.json"
+    url = "https://storage.googleapis.com/matches-data/matches_data.json"
 
     response = requests.get(url)
 
