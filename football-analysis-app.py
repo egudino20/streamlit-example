@@ -197,16 +197,16 @@ def main():
     }
     league_folder = league_to_comp[country]
 
+    main_folder = "streamlit-example"
+
     url = "https://storage.googleapis.com/matches-data/matches_data.json"
 
-    response = requests.get(url)
-
     try:
+        response = requests.get(url)
         if response.status_code == 404:
             st.error("Resource not found. Please check the URL.")
         else:
-            matches_data = response.json()
-            # Process the matches_data as needed
+            matches_data = response.json
     except requests.exceptions.RequestException as e:
         st.error(f"Connection error: {e}")
 
