@@ -201,11 +201,14 @@ def main():
 
     response = requests.get(url)
 
-    if response.status_code == 200:
-        matches_data = response.json()
-        # Process the matches_data as needed
-    else:
-        print("Failed to retrieve the matches_data.json file.")
+    try:
+        if response.status_code == 404:
+            st.error("Resource not found. Please check the URL.")
+        else:
+            matches_data = response.json()
+            # Process the matches_data as needed
+    except requests.exceptions.RequestException as e:
+        st.error(f"Connection error: {e}")
 
     # league identifiers
     league = f"{matches_data[0]['region']} {matches_data[0]['league']} {matches_data[0]['season']}"
