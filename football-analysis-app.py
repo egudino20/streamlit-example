@@ -64,11 +64,9 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     title_font = 'Roboto'
     body_font = 'Roboto'
 
-    main_folder = r"streamlit-example"
-
     if web_app == True:
 
-        df = pd.read_csv(f'{main_folder}/Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
+        df = pd.read_csv(f'Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
 
     else:
 
@@ -146,7 +144,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     ax2 = fig.add_axes([0.05,0.99,0.08,0.08])
     ax2.axis('off')
 
-    path = f'{main_folder}/Logos/{comp}/{team}.png'
+    path = f'Logos/{comp}/{team}.png'
     ax_team = fig.add_axes([-0.02,0.99,0.175,0.175])
     ax_team.axis('off')
     im = plt.imread(path)
@@ -197,8 +195,6 @@ def main():
     }
     league_folder = league_to_comp[country]
 
-    main_folder = r"streamlit-example"
-
     url = "https://storage.googleapis.com/matches-data/matches_data.json"
 
     try:
@@ -215,7 +211,7 @@ def main():
 
     season = matches_data[0]['season'] 
 
-    #events_df = pd.read_csv(f'{main_folder}/Data/{league_folder}/{season[5:]}/raw-season-data/{league_folder}-{date_str}.csv', low_memory=False)
+    #events_df = pd.read_csv(f'Data/{league_folder}/{season[5:]}/raw-season-data/{league_folder}-{date_str}.csv', low_memory=False)
     #events_df.drop('Unnamed: 0', axis=1, inplace=True)
 
     options = ['Team Performance', 'Match Data', 'Individual Match Team Data', 
@@ -245,7 +241,7 @@ def main():
             st.write("No Data")
 
         # Load the underlying data
-        data_path = f'{main_folder}/Data/{league_folder}/{season[5:]}/match-logs/{team}-match-logs.csv'
+        data_path = f'Data/{league_folder}/{season[5:]}/match-logs/{team}-match-logs.csv'
         data_df = pd.read_csv(data_path)
         data_df = data_df[['teamName', 'opponent', 'matchId', 'startDate'] + metrics]
 
