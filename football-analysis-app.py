@@ -25,6 +25,7 @@ import matplotlib.colors as mcolors
 
 # web scraping
 from selenium import webdriver
+import requests
 
 # text and annotation
 from itertools import combinations
@@ -196,13 +197,15 @@ def main():
     }
     league_folder = league_to_comp[country]
 
-    main_folder = r"/mount/src/streamlit-example"
-    filename = "matches_data.json"
-    #filepath = os.path.join(main_folder, "Data", league_folder, year, "match-data", filename)
-    filepath = "https://storage.cloud.google.com/matches-data/matches_data.json"
+    url = "https://storage.cloud.google.com/matches-data/matches_data.json"
 
-    with open(filepath, "r") as f:
-        matches_data = json.load(f)
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        matches_data = response.json()
+        # Process the matches_data as needed
+    else:
+        print("Failed to retrieve the matches_data.json file.")
 
     # league identifiers
     league = f"{matches_data[0]['region']} {matches_data[0]['league']} {matches_data[0]['season']}"
