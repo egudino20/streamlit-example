@@ -177,7 +177,19 @@ def main():
 
     # Add sidebar for season
     season = st.sidebar.selectbox('Choose a season', ['2023', '2024'])
-    prev_season = season - 1
+    # Check if the input is valid
+    if season:
+        try:
+            # Parse the input season as an integer
+            input_season = int(season)
+            
+            # Calculate the prev_season
+            prev_season = input_season - 1
+
+        except ValueError:
+            st.sidebar.error("Please enter a valid season (e.g., 2023)")
+    else:
+        st.sidebar.info("Please enter a season in the sidebar.")
 
     # Add sidebar for date
    # date = st.sidebar.date_input('Choose a date')
