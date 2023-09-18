@@ -176,7 +176,7 @@ def main():
     country = st.sidebar.selectbox('Choose a league', ['Argentina', 'Spain', 'England', 'France', 'Germany', 'Italy'])
 
     # Add sidebar for season
-    year = st.sidebar.selectbox('Choose a season', ['2023', '2024'])
+    season = st.sidebar.selectbox('Choose a season', ['2023', '2024'])
 
     # Add sidebar for date
    # date = st.sidebar.date_input('Choose a date')
