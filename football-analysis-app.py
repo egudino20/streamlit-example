@@ -173,7 +173,7 @@ def main():
     st.title('Football Analysis')
 
     # Add sidebar for league
-    country = st.sidebar.selectbox('Choose a league', ['Argentina', 'Spain', 'England', 'France', 'Germany', 'Italy'])
+    country = st.sidebar.selectbox('Choose a league', ['England', 'Argentina', 'Spain', 'France', 'Germany', 'Italy'])
 
     # Add sidebar for season
     season = st.sidebar.selectbox('Choose a season', ['2023', '2024'])
