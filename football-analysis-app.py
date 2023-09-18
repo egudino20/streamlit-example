@@ -66,11 +66,11 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
 
     if web_app == True:
 
-        df = pd.read_csv(f'Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
+        df = pd.read_csv(f'Data/{comp}/{season}/match-logs/{team}-match-logs.csv', index_col=0)
 
     else:
 
-        df = pd.read_csv(f'Data/{comp}/{season[5:]}/match-logs/{team}-match-logs.csv', index_col=0)
+        df = pd.read_csv(f'Data/{comp}/{season}/match-logs/{team}-match-logs.csv', index_col=0)
         
     df['yrAvg'] = df[metric_1].rolling(window=10).mean()
     df['zrAvg'] = df[metric_2].rolling(window=10).mean()
@@ -195,21 +195,21 @@ def main():
     }
     league_folder = league_to_comp[country]
 
-    url = "https://storage.googleapis.com/matches-data/matches_data.json"
+    #url = "https://storage.googleapis.com/matches-data/matches_data.json"
 
-    try:
-        response = requests.get(url)
-        if response.status_code == 404:
-            st.error("Resource not found. Please check the URL.")
-        else:
-            matches_data = response.json()
-    except requests.exceptions.RequestException as e:
-        st.error(f"Connection error: {e}")
+    #try:
+    #    response = requests.get(url)
+    #    if response.status_code == 404:
+    #        st.error("Resource not found. Please check the URL.")
+    #    else:
+    #        matches_data = response.json()
+    #except requests.exceptions.RequestException as e:
+    #    st.error(f"Connection error: {e}")
 
     # league identifiers
-    league = f"{matches_data[0]['region']} {matches_data[0]['league']} {matches_data[0]['season']}"
+    #league = f"{matches_data[0]['region']} {matches_data[0]['league']} {matches_data[0]['season']}"
 
-    season = matches_data[0]['season'] 
+    #season = matches_data[0]['season'] 
 
     #events_df = pd.read_csv(f'Data/{league_folder}/{season[5:]}/raw-season-data/{league_folder}-{date_str}.csv', low_memory=False)
     #events_df.drop('Unnamed: 0', axis=1, inplace=True)
@@ -241,7 +241,7 @@ def main():
             st.write("No Data")
 
         # Load the underlying data
-        data_path = f'Data/{league_folder}/{season[5:]}/match-logs/{team}-match-logs.csv'
+        data_path = f'Data/{league_folder}/{season}/match-logs/{team}-match-logs.csv'
         data_df = pd.read_csv(data_path)
         data_df = data_df[['teamName', 'opponent', 'matchId', 'startDate'] + metrics]
 
