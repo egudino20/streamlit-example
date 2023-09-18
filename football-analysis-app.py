@@ -177,6 +177,7 @@ def main():
 
     # Add sidebar for season
     season = st.sidebar.selectbox('Choose a season', ['2023', '2024'])
+    prev_season = season - 1
 
     # Add sidebar for date
    # date = st.sidebar.date_input('Choose a date')
@@ -230,7 +231,7 @@ def main():
                                     'Newcastle United', 'Norwich City', 'Southampton', 'Tottenham Hotspur', 
                                     'Watford', 'West Ham United', 'Wolverhampton Wanderers']        
             team = st.sidebar.selectbox('Select a team', premier_league_teams)
-            league = f"{country} Premier League {season}"
+            league = f"{country} Premier League {prev_season}/{season}"
         else:
             team = st.sidebar.text_input('Enter a team name')
         selected_metric_1 = st.sidebar.selectbox('Select metric 1', metrics)
