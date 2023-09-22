@@ -11,7 +11,6 @@ import requests
 import scipy
 import seaborn as sns
 import matplotlib.pyplot as plt
-from mplsoccer import Pitch, VerticalPitch, FontManager
 import matplotlib.colors as mcolors
 from matplotlib.colors import to_rgba
 from matplotlib.patches import ConnectionPatch
@@ -24,6 +23,7 @@ import matplotlib.patheffects as path_effects
 from matplotlib.colors import Normalize
 import matplotlib.font_manager as fm
 import matplotlib.colors as mcolors
+from mplsoccer import Pitch, VerticalPitch, FontManager
 
 # web scraping
 from selenium import webdriver
