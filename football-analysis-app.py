@@ -57,6 +57,9 @@ from io import BytesIO
 import datetime
 from tools import xThreat
 
+# Set the backend to TkAgg
+mpl.use('TkAgg')
+
 def load_matches_data(league_folder, season):
 
     # Define the folder where your JSON files are located
