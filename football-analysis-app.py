@@ -127,6 +127,8 @@ def load_events_df(matches_data):
     # Concatenate all DataFrames into a single DataFrame
     events_df = pd.concat(dfs, ignore_index=True)
 
+    return events_df
+
     # Now you have events_df containing data from all matching files
 
 def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
