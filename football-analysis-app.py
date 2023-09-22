@@ -7,13 +7,15 @@ import numpy as np
 
 # data visualization
 import matplotlib as mpl
+import requests
+import scipy
+import seaborn as sns
 import matplotlib.pyplot as plt
 from mplsoccer import Pitch, VerticalPitch, FontManager
 import matplotlib.colors as mcolors
 from matplotlib.colors import to_rgba
 from matplotlib.patches import ConnectionPatch
 import matplotlib.gridspec as gridspec
-#import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.image as mpimg
 import matplotlib.ticker as ticker
