@@ -291,7 +291,7 @@ def process_and_export_match_data(events_df, matches_data, season, comp):
         home = team_df.teamName.unique()[0]
         away = team_df.teamName.unique()[1]
         date = team_df.startDate.unique()[0]
-        team_df.to_csv(f'Data/{comp}/{season[5:]}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
+        team_df.to_csv(f'Data/{comp}/{season}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
         dfs.append(df)
     
     return dfs
@@ -667,7 +667,7 @@ def main():
         matches_data = load_matches_data(league_folder, season)
         events_df = load_events_df(matches_data)
         # process and export events data after loading it
-        dfs = process_and_export_match_data(events_df, matches_data, season, comp=league_folder)
+        dfs = process_and_export_match_data(events_df, matches_data, season, league_folder)
         team_dataframes = load_individual_match_team_dfs(league_folder, season)
 
         # plot the final result
