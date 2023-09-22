@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 
 # data visualization
+import PIL
 import matplotlib as mpl
 import requests
 import scipy
