@@ -7,8 +7,6 @@ import numpy as np
 
 # data visualization
 import matplotlib as mpl
-# Set the backend to TkAgg
-mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 from mplsoccer import Pitch, VerticalPitch, FontManager
 import matplotlib.colors as mcolors
