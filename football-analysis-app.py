@@ -10,19 +10,19 @@ import matplotlib as mpl
 import requests
 import scipy
 import seaborn as sns
-import mpl.pyplot as plt
-import mpl.colors as mcolors
-from mpl.colors import to_rgba
-from mpl.patches import ConnectionPatch
-import mpl.gridspec as gridspec
-from mpl.colors import LinearSegmentedColormap, ListedColormap
-import mpl.image as mpimg
-import mpl.ticker as ticker
-import mpl.patheffects as path_effects
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+from matplotlib.colors import to_rgba
+from matplotlib.patches import ConnectionPatch
+import matplotlib.gridspec as gridspec
+from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+import matplotlib.image as mpimg
+import matplotlib.ticker as ticker
+import matplotlib.patheffects as path_effects
 #from mplsoccer import PyPizza, add_image, FontManager
-from mpl.colors import Normalize
-import mpl.font_manager as fm
-import mpl.colors as mcolors
+from matplotlib.colors import Normalize
+import matplotlib.font_manager as fm
+import matplotlib.colors as mcolors
 from mplsoccer import Pitch, VerticalPitch, FontManager
 
 # web scraping
