@@ -7,6 +7,8 @@ import numpy as np
 
 # data visualization
 import matplotlib as mpl
+# Set the backend to TkAgg
+mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 from mplsoccer import Pitch, VerticalPitch, FontManager
 import matplotlib.colors as mcolors
@@ -56,9 +58,6 @@ from io import BytesIO
 # other
 import datetime
 from tools import xThreat
-
-# Set the backend to TkAgg
-mpl.use('TkAgg')
 
 def load_matches_data(league_folder, season):
 
