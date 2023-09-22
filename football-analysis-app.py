@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 # data visualization
-import matplotlib
+import matplotlib as mpl
 import requests
 import scipy
 import seaborn as sns
