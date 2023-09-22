@@ -23,7 +23,7 @@ import matplotlib.patheffects as path_effects
 from matplotlib.colors import Normalize
 import matplotlib.font_manager as fm
 import matplotlib.colors as mcolors
-from mplsoccer import Pitch, VerticalPitch, FontManager
+from mplsoccer import VerticalPitch
 
 # web scraping
 from selenium import webdriver
