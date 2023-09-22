@@ -241,7 +241,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     # save figure
     #fig.savefig(f'{main_folder}/Output/{comp}/{season[5:]}/{team}-{start_date}-{end_date}', dpi=None, bbox_inches="tight")
 
-def process_and_export_match_data(events_df, matches_data, comp, season):
+def process_and_export_match_data(events_df, matches_data, season, comp):
 
     teamNames = []
 
@@ -667,7 +667,7 @@ def main():
         matches_data = load_matches_data(league_folder, season)
         events_df = load_events_df(matches_data)
         # process and export events data after loading it
-        dfs = process_and_export_match_data(events_df, matches_data, league_folder, season)
+        dfs = process_and_export_match_data(events_df, matches_data, season, comp=league_folder)
         team_dataframes = load_individual_match_team_dfs(league_folder, season)
 
         # plot the final result
