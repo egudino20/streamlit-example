@@ -83,6 +83,8 @@ def load_matches_data(league_folder, season):
     # Define the output file path for the concatenated data
     # output_file_path = os.path.join("Data", "premier-league", "2024", "match-data", "matches_data.json")
 
+    return matches_data
+
 def load_events_df(matches_data):
 
     # league identifiers
