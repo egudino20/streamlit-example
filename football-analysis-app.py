@@ -7,6 +7,7 @@ import numpy as np
 
 # data visualization
 import matplotlib as mpl
+from matplotlib import docstring
 import requests
 import scipy
 import seaborn as sns
