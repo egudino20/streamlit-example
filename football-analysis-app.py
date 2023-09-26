@@ -19,11 +19,11 @@ from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 import matplotlib.image as mpimg
 import matplotlib.ticker as ticker
 import matplotlib.patheffects as path_effects
-#from mplsoccer import PyPizza, add_image, FontManager
 from matplotlib.colors import Normalize
 import matplotlib.font_manager as fm
 import matplotlib.colors as mcolors
-#from mplsoccer import VerticalPitch
+from mplsoccer import PyPizza, add_image, FontManager
+from mplsoccer import VerticalPitch
 
 # web scraping
 from selenium import webdriver
