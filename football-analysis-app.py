@@ -300,7 +300,7 @@ def load_individual_match_team_dfs(comp, season, pass_filter='passes-carries'):
 
     # Enter a team for pass_filter
 
-    path_to_folder = f'Data/{comp}/{season[5:]}/raw-season-data/'
+    path_to_folder = f'Data/{comp}/{season}/raw-season-data/'
     team_csv_files = glob.glob(os.path.join(path_to_folder, f'*{pass_filter}*.csv'))
     team_dataframes = []
     
