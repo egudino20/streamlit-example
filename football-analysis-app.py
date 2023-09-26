@@ -648,7 +648,7 @@ def main():
     
     elif option == 'Match Week Zone Control':
         
-        match_weeks = [1, 2, 3, 4, 5]
+        match_weeks = [1, 2, 3, 4, 5, 6]
 
         if country == 'England':
             premier_league_teams = ['Arsenal', 'Aston Villa', 'Brentford', 'Brighton & Hove Albion', 
@@ -664,10 +664,10 @@ def main():
         match_week = st.sidebar.selectbox('Select match week', match_weeks)
 
         #load matches data and events data
-        matches_data = load_matches_data(league_folder, season)
-        events_df = load_events_df(matches_data)
+        #matches_data = load_matches_data(league_folder, season)
+        #events_df = load_events_df(matches_data)
         # process and export events data after loading it
-        dfs = process_and_export_match_data(events_df, matches_data, season, league_folder)
+        #dfs = process_and_export_match_data(events_df, matches_data, season, league_folder)
         team_dataframes = load_individual_match_team_dfs(league_folder, season)
 
         # plot the final result
