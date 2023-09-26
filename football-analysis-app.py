@@ -62,7 +62,7 @@ from tools import xThreat
 def load_matches_data(league_folder, season):
 
     # Define the folder where your JSON files are located
-    folder_path = os.path.join("egudino20/streamlit-example/master", "Data", f"{league_folder}", f"{season}", "match-data")
+    folder_path = os.path.join("Data", f"{league_folder}", f"{season}", "match-data")
 
     # Initialize an empty list to store the concatenated data
     matches_data = []
@@ -107,7 +107,7 @@ def load_events_df(matches_data):
         comp = 'serie-a'
 
     # Define the directory and pattern to search for files
-    directory = os.path.join("egudino20/streamlit-example/master", f'Data/{comp}/{season[5:]}/raw-season-data/')
+    directory = f'Data/{comp}/{season[5:]}/raw-season-data/'
     pattern = f'{comp}-*.csv'
 
     # Use glob to find all matching files
@@ -291,8 +291,7 @@ def process_and_export_match_data(events_df, matches_data, season, comp):
         home = team_df.teamName.unique()[0]
         away = team_df.teamName.unique()[1]
         date = team_df.startDate.unique()[0]
-        # Update the file path to use the correct root directory
-        team_df.to_csv(f'egudino20/streamlit-example/master/Data/{comp}/{season}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
+        team_df.to_csv(f'Data/{comp}/{season}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
         dfs.append(df)
     
     return dfs
@@ -300,7 +299,8 @@ def process_and_export_match_data(events_df, matches_data, season, comp):
 def load_individual_match_team_dfs(comp, season, pass_filter='passes-carries'):
 
     # Enter a team for pass_filter
-    path_to_folder = os.path.join("egudino20/streamlit-example/master", f'Data/{comp}/{season[5:]}/raw-season-data/')
+
+    path_to_folder = f'Data/{comp}/{season[5:]}/raw-season-data/'
     team_csv_files = glob.glob(os.path.join(path_to_folder, f'*{pass_filter}*.csv'))
     team_dataframes = []
     
