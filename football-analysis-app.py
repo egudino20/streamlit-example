@@ -658,7 +658,7 @@ def main():
                                     'Leicester City', 'Liverpool', 'Manchester City', 'Manchester United',
                                     'Newcastle United', 'Norwich City', 'Southampton', 'Tottenham Hotspur', 
                                     'Watford', 'West Ham United', 'Wolverhampton Wanderers']        
-            team = st.sidebar.selectbox('Select a team', premier_league_teams)
+            #team = st.sidebar.selectbox('Select a team', premier_league_teams)
             league = f"{country} Premier League {prev_season}/{season}"
         else:
             team = st.sidebar.text_input('Enter a team name')
