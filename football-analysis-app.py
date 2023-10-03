@@ -673,8 +673,8 @@ def main():
         team_dataframes = load_individual_match_team_dfs(league_folder, season)
 
         # plot the final result
-        result = generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=False)
-        st.pyplot(result)  # Display the plot
+        generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=False)
+        #st.pyplot(result)  # Display the plot
        
 
     #elif option == 'Individual Match Team Data':
