@@ -541,6 +541,8 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     im = plt.imread(path)
     ax_team.imshow(im);
 
+    st.pyplot(fig)
+
 def main():
     print("Current working directory:", os.getcwd())
     st.title('Football Analysis')
