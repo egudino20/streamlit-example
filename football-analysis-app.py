@@ -356,7 +356,7 @@ def load_individual_match_team_dfs(comp, season, pass_filter='passes-carries'):
     
     return team_dataframes
 
-def load_season_match_team_dfs(matches_data, comp, season):
+def load_season_match_team_dfs(matches_data, league_folder, season):
     
     teamNames = []
 
@@ -384,7 +384,7 @@ def load_season_match_team_dfs(matches_data, comp, season):
     clubs = list(teams.teamName.unique())
 
     # Replace 'path_to_folder' with the path to your folder containing the CSV files
-    path_to_folder = f'Data/{comp}/{season[5:]}/team-files/'
+    path_to_folder = f'Data/{league_folder}/{season[5:]}/team-files/'
 
         # Define the data types for each column in your CSV files
     dtypes = {
@@ -405,7 +405,7 @@ def load_season_match_team_dfs(matches_data, comp, season):
 
     for club in clubs:
 
-        club_df = pd.read_csv(f'{path_to_folder}{club}-{season[5:]}.csv')
+        club_df = pd.read_csv(f"{path_to_folder}{club}-{season[5:]}.csv")
 
         club_df = club_df[club_df['outcomeType'] == 'Successful']
         club_df['isOpenPlay'] = np.where((club_df['passFreekick'] == False) &
