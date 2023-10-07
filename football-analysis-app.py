@@ -296,6 +296,51 @@ def process_and_export_match_data(events_df, matches_data, season, comp):
     
     return dfs
 
+def process_and_export_season_match_data(comp, season, matches_data):
+    try:
+        teamNames = []
+
+        for match in matches_data:
+            teamHomeName = match['home']['name']
+            teamAwayName = match['away']['name']
+
+            teamNames.append(teamHomeName)
+            teamNames.append(teamAwayName)
+
+        teamIds = []
+
+        for match in matches_data:
+            teamHomeId = match['home']['teamId']
+            teamAwayId = match['away']['teamId']
+
+            teamIds.append(teamHomeId)
+            teamIds.append(teamAwayId)
+
+        teams = pd.DataFrame({'teamId': teamIds,
+                              'teamName': teamNames})
+
+        teams = teams.drop_duplicates().reset_index(drop=True)
+
+        path_to_folder = f'Data/{comp}/{season[5:]}/raw-season-data/'
+
+        clubs = list(teams.teamName.unique())
+
+        for club in clubs:
+            team_csv_files = glob.glob(os.path.join(path_to_folder, f'*{club}*.csv'))
+
+            team_dataframes = []
+
+            for csv_file in team_csv_files:
+                match_data = pd.read_csv(csv_file)
+                match_data = match_data.drop(match_data.columns[match_data.columns.str.contains('Unnamed', case=False)], axis=1)
+                team_dataframes.append(match_data)
+
+            club_dataframes = pd.concat(team_dataframes, axis=0)
+            club_dataframes.to_csv(f'Data/{comp}/{season[5:]}/team-files/{club}-{season[5:]}.csv')
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
 def load_individual_match_team_dfs(comp, season, pass_filter='passes-carries'):
 
     # Enter a team for pass_filter
@@ -310,6 +355,82 @@ def load_individual_match_team_dfs(comp, season, pass_filter='passes-carries'):
         team_dataframes.append(match_data)
     
     return team_dataframes
+
+def load_season_match_team_dfs(matches_data, comp, season):
+    
+    teamNames = []
+
+    for match in matches_data:
+        teamHomeName = match['home']['name']
+        teamAwayName = match['away']['name']
+
+        teamNames.append(teamHomeName)
+        teamNames.append(teamAwayName)
+
+    teamIds = []
+
+    for match in matches_data:
+        teamHomeId = match['home']['teamId']
+        teamAwayId = match['away']['teamId']
+
+        teamIds.append(teamHomeId)
+        teamIds.append(teamAwayId)
+
+    teams = pd.DataFrame({'teamId': teamIds,
+                            'teamName': teamNames})
+
+    teams = teams.drop_duplicates().reset_index(drop=True)
+
+    clubs = list(teams.teamName.unique())
+
+    # Replace 'path_to_folder' with the path to your folder containing the CSV files
+    path_to_folder = f'Data/{comp}/{season[5:]}/team-files/'
+
+        # Define the data types for each column in your CSV files
+    dtypes = {
+        'playerName': 'str',
+        'teamName': 'str',
+        'teamId': 'int',
+        'matchId': 'int',
+        'startDate': 'str',
+        'type': 'str',
+        'x': 'float',
+        'y': 'float',
+        'endX': 'float',
+        'endY': 'float',
+        'xT': 'float'
+    }
+
+    final_club_dfs = []
+
+    for club in clubs:
+
+        club_df = pd.read_csv(f'{path_to_folder}{club}-{season[5:]}.csv')
+
+        club_df = club_df[club_df['outcomeType'] == 'Successful']
+        club_df['isOpenPlay'] = np.where((club_df['passFreekick'] == False) &
+                                      ((club_df['passCorner'] == False)
+                                                    ) 
+                                                   , 1, 0
+                                                   )
+        club_df = club_df[club_df['isOpenPlay'] == 1]
+
+        club_df = club_df[['playerName', 'teamName', 'teamId', 'matchId', 'startDate', 'type', 'x', 'y', 'endX', 'endY', 'xT']]
+
+        club_df['xT'] = club_df['xT'].fillna(0)
+
+        # Create a boolean mask to identify rows where "teamName" is not equal to "Arsenal"
+        mask = club_df['teamName'] != club
+
+        # Multiply the values in "xT" column by -1 where the mask is True
+        club_df.loc[mask, 'xT'] *= -1
+
+        # Flip the "x" and "y" coordinates by subtracting them from 100 where the mask is True
+        club_df.loc[mask, ['x', 'y', 'endX', 'endY']] = 100 - club_df.loc[mask, ['x', 'y', 'endX', 'endY']]
+
+        final_club_dfs.append(club_df)
+
+    return final_club_dfs   
 
 def generate_match_week_zone_control_viz(team_dataframes, match_week, league, comp, season, off_week=True):
 
@@ -543,6 +664,175 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
 
     st.pyplot(fig)
 
+def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, season, juego_de_po=True):
+
+    teamNames = []
+
+    for match in matches_data:
+        teamHomeName = match['home']['name']
+        teamAwayName = match['away']['name']
+
+        teamNames.append(teamHomeName)
+        teamNames.append(teamAwayName)
+
+    teamIds = []
+
+    for match in matches_data:
+        teamHomeId = match['home']['teamId']
+        teamAwayId = match['away']['teamId']
+
+        teamIds.append(teamHomeId)
+        teamIds.append(teamAwayId)
+
+    teams = pd.DataFrame({'teamId': teamIds,
+                            'teamName': teamNames})
+
+    teams = teams.drop_duplicates().reset_index(drop=True)
+
+    clubs = list(teams.teamName.unique())
+
+    # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
+    plt.rcParams['font.family'] = 'Roboto'
+
+    title_font = 'Roboto'
+    body_font = 'Roboto'
+
+    if juego_de_po == True:
+
+        # Define the custom colormap with colors for negative, zero, and positive values
+        negative_color = '#ff4500'   # Red for negative values
+        zero_color = '#1d2849'        # Dark blue for zero values
+        positive_color = '#39ff14'    # Green for positive values
+
+        colors = [(negative_color), (zero_color), (positive_color)]
+        n_bins = 100  # Number of color bins
+        cmap = LinearSegmentedColormap.from_list('custom_cmap', colors, N=n_bins)
+
+    else:
+
+        # Set up the custom colormap with different shades for negative, zero, and positive values
+        negative_color = '#ff4500'
+        central_color = '#1d2849'
+        positive_color = '#39ff14'
+
+        n_bins = 256  # Number of color bins
+
+        # Create a smooth transition colormap
+        cmap = LinearSegmentedColormap.from_list('custom_cmap', [negative_color, central_color, positive_color], N=n_bins)
+
+        # Define the range for colormap values
+        vmax_global = None  # Global max value for all matches
+        vmin_global = None  # Global min value for all matches
+
+    if juego_de_po == True:
+
+        # Setup the pitch
+        pitch = VerticalPitch(pitch_type='opta', pitch_color='#1d2849', line_color='w', line_zorder=5,
+                            half=False, pad_top=2, axis=False, 
+                            positional=True, positional_color='#eadddd', positional_zorder=5)
+    
+    else:
+    
+        # Setup the pitch
+        pitch = VerticalPitch(pitch_type='opta', pitch_color='#1d2849', line_color='w', line_zorder=5,
+                            half=False, pad_top=2, axis=False, 
+                            positional=True, positional_color='#eadddd', positional_zorder=5)
+
+    # Create the subplot grid using mplsoccer
+    fig, axs = pitch.grid(nrows=4, ncols=5, figheight=30,
+                        endnote_height=0.01, endnote_space=0.01,
+                        axis=False, space=0.1,
+                        title_height=0.08, grid_height=0.84)
+    fig.set_facecolor('#1d2849')
+
+    # Set the title
+    title = f"Match Zone Control"
+    fig.text(0.032,1.0,title, fontsize=40,
+            fontfamily=body_font, fontweight='bold', color='w')
+
+    ax_text(0.245, 97, f"{league} - All Matches", fontsize=28, ha='center',
+            fontfamily=body_font, fontweight='bold', color='w')
+
+    ax_text(0, 94, f"<Green> shaded zones represent zones controlled by the team represented in each map", 
+            fontsize=24, fontfamily=body_font, fontweight='bold', color='w',
+            highlight_textprops=[{'color': positive_color}])
+
+    ax_text(0, 92.5, "<Red> shaded zones represent zones controlled by the opposition", 
+            fontsize=24, fontfamily=body_font, fontweight='bold', color='w',
+            highlight_textprops=[{'color': negative_color}])
+
+    ax_text(0, 91, "Blue shaded zones represent neutral zones, not domindated by the represented team and opposition", 
+            fontsize=24, fontfamily=body_font, fontweight='bold', color='w')
+
+    # Set the footnote
+    footnote = "Zone Control is defined as the difference of expected threat (xT) generated (+) and conceded (-) in each zone\nfrom the start location of open play passes and carries. Expected threat model by Karun Singh."
+    footnote2 = 'Data via Opta | Created by @egudi_analysis'
+    ax_text(0.39, 0, f"{footnote}\n{footnote2}", fontsize=20, ha='center',
+            fontfamily=body_font, fontweight='bold', color='w')
+
+
+    # Calculate the title height for positioning the logos
+    title_height = 1  # Adjust as needed
+
+    # Cycle through the grid axes and plot the heatmaps for each match
+    for idx, (ax, df) in enumerate(zip(axs['pitch'].flat, final_club_dfs)):
+        if idx < len(clubs):
+        # Assuming final_club_dfs is your list of dataframes
+            highest_counts = df.teamName.value_counts()
+            team_with_highest_count = highest_counts.idxmax()
+            team_name_string = str(team_with_highest_count)
+
+            if juego_de_po == True:
+            
+                # Calculate the sum total of 'xT' in each bin
+                bin_statistic = pitch.bin_statistic_positional(df.x, df.y, df.xT, statistic='sum', positional='full',
+                                                               normalize=True)
+            
+                # Use the colormap to create the heatmap using mplsoccer
+                pitch.heatmap_positional(bin_statistic, ax=ax, edgecolors='#1a223d', cmap=cmap, vmin=-1, vmax=1)
+
+            else:
+
+                # Calculate the sum total of 'xT' in each bin
+                bin_statistic = pitch.bin_statistic(df.x, df.y, df.xT, statistic='sum', bins=(24, 12))
+                bin_statistic['statistic'] = gaussian_filter(bin_statistic['statistic'], 1)
+                
+                # Update the global max and min values for colormap normalization
+                if vmax_global is None or np.max(bin_statistic['statistic']) > vmax_global:
+                    vmax_global = np.max(bin_statistic['statistic'])
+                if vmin_global is None or np.min(bin_statistic['statistic']) < vmin_global:
+                    vmin_global = np.min(bin_statistic['statistic'])
+                
+                # Normalize the sum total of 'xT' to colormap indices
+                norm = plt.Normalize(vmin_global, vmax_global)
+                
+                # Map the sum total of 'xT' to colormap indices
+                bin_statistic['color_index'] = norm(bin_statistic['statistic'])
+                
+                # Use the colormap to create the heatmap using mplsoccer
+                pitch.heatmap(bin_statistic, ax=ax, edgecolors='#1a223d', cmap=cmap)
+            
+            ax_text(83,110, f"<{team_name_string}>", color='w', fontsize=25,
+                    fontfamily=body_font, fontweight='bold', ax=ax)
+            
+            # Load logo images
+            team_logo_path = f'Logos/{comp}/{team_name_string}.png'
+            team_logo = plt.imread(team_logo_path)
+            
+            # Position the logo next to the title
+            logo_ax = fig.add_axes([ax.get_position().x0, ax.get_position().y1, 0.03, 0.03])
+            logo_ax.imshow(team_logo)
+            logo_ax.axis('off')
+            
+            ax.axis('off')  # Turn off axis for a clean visualization
+        
+    # league logo
+    path = f'Logos/{comp}/{comp}.png'
+    ax_team = fig.add_axes([0.87,0.91,0.12,0.12])
+    ax_team.axis('off')
+    im = plt.imread(path)
+    ax_team.imshow(im);
+
 def main():
     print("Current working directory:", os.getcwd())
     st.title('Football Analysis')
@@ -602,7 +892,7 @@ def main():
     #events_df = pd.read_csv(f'Data/{league_folder}/{season[5:]}/raw-season-data/{league_folder}-{date_str}.csv', low_memory=False)
     #events_df.drop('Unnamed: 0', axis=1, inplace=True)
 
-    options = ['Team Performance', 'Match Week Zone Control']
+    options = ['Team Performance', 'Match Week Zone Control', 'All Matches Zone Control']
 
     option = st.sidebar.selectbox('Choose an option', options)
 
@@ -677,35 +967,33 @@ def main():
         #st.pyplot(result)  # Display the plot
        
 
-    #elif option == 'Individual Match Team Data':
-        # Call your load_individual_match_team_dfs method here
-        # result = my_module.load_individual_match_team_dfs()
-        # st.write(result)
+    elif option == 'All Matches Zone Control':
+        
+        match_weeks = [1, 2, 3, 4, 5, 6, 7]
 
-    #elif option == 'Match Week Zone Control Visualization':
-        # Call your generate_match_week_zone_control_viz method here
-        # result = my_module.generate_match_week_zone_control_viz()
-        # st.write(result)
+        if country == 'England':
+            premier_league_teams = ['Arsenal', 'Aston Villa', 'Brentford', 'Brighton & Hove Albion', 
+                                    'Burnley', 'Chelsea', 'Crystal Palace', 'Everton', 'Leeds United', 
+                                    'Leicester City', 'Liverpool', 'Manchester City', 'Manchester United',
+                                    'Newcastle United', 'Norwich City', 'Southampton', 'Tottenham Hotspur', 
+                                    'Watford', 'West Ham United', 'Wolverhampton Wanderers']        
+            #team = st.sidebar.selectbox('Select a team', premier_league_teams)
+            league = f"{country} Premier League {prev_season}/{season}"
+        else:
+            team = st.sidebar.text_input('Enter a team name')
+        
+        match_week = st.sidebar.selectbox('Select match week', match_weeks)
 
-    #elif option == 'Team Zone Control Visualization':
-        # Call your generate_team_zone_control_viz method here
-        # result = my_module.generate_team_zone_control_viz()
-        # st.write(result)
+        #load matches data
+        matches_data = load_matches_data(league_folder, season)
+        # load exported data and save to team_dataframes
+        final_club_dfs = load_season_match_team_dfs(matches_data, league_folder, season)
+        # generate final visual
+        generate_all_teams_zone_control(matches_data, league, final_club_dfs, league_folder, season, juego_de_po=True)
 
-    #elif option == 'All Teams Zone Control':
-        # Call your generate_all_teams_zone_control method here
-        # result = my_module.generate_all_teams_zone_control()
-        # st.write(result)
-
-    #elif option == 'Season Match Data':
-        # Call your process_and_export_season_match_data method here
-        # result = my_module.process_and_export_season_match_data()
-        # st.write(result)
-
-    #elif option == 'Season Match Team Data':
-        # Call your load_season_match_team_dfs method here
-        # result = my_module.load_season_match_team_dfs()
-        # st.write(result)
+        # plot the final result
+        generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=True)
+        #st.pyplot(result)  # Display the plot
 
 if __name__ == "__main__":
     main()
