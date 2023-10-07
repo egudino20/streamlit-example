@@ -650,7 +650,7 @@ def main():
     
     elif option == 'Match Week Zone Control':
         
-        match_weeks = [1, 2, 3, 4, 5, 6]
+        match_weeks = [1, 2, 3, 4, 5, 6, 7]
 
         if country == 'England':
             premier_league_teams = ['Arsenal', 'Aston Villa', 'Brentford', 'Brighton & Hove Albion', 
