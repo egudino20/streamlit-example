@@ -405,7 +405,7 @@ def load_season_match_team_dfs(matches_data, league_folder, season):
 
     for club in clubs:
 
-        club_df = pd.read_csv(f"Data/{league_folder}/{season[5:]}/team-files/'{club}-{season[5:]}.csv")
+        club_df = pd.read_csv(f"Data/{league_folder}/{season}/team-files/'{club}-{season[5:]}.csv")
 
         club_df = club_df[club_df['outcomeType'] == 'Successful']
         club_df['isOpenPlay'] = np.where((club_df['passFreekick'] == False) &
