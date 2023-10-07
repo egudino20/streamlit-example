@@ -384,7 +384,7 @@ def load_season_match_team_dfs(matches_data, league_folder, season):
     clubs = list(teams.teamName.unique())
 
     # Replace 'path_to_folder' with the path to your folder containing the CSV files
-    path_to_folder = f'Data/{league_folder}/{season[5:]}/team-files/'
+    path_to_folder = f'Data/{league_folder}/{season}/team-files/'
 
         # Define the data types for each column in your CSV files
     dtypes = {
