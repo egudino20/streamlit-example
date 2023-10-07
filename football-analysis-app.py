@@ -984,7 +984,7 @@ def main():
         else:
             team = st.sidebar.text_input('Enter a team name')
         
-        match_week = st.sidebar.selectbox('Select match week', match_weeks)
+        #match_week = st.sidebar.selectbox('Select match week', match_weeks)
 
         #load matches data
         matches_data = load_matches_data(league_folder, season)
