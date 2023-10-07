@@ -833,6 +833,8 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
     im = plt.imread(path)
     ax_team.imshow(im);
 
+    st.pyplot(fig)
+
 def main():
     print("Current working directory:", os.getcwd())
     st.title('Football Analysis')
@@ -991,8 +993,6 @@ def main():
         # generate final visual
         generate_all_teams_zone_control(matches_data, league, final_club_dfs, league_folder, season, juego_de_po=True)
 
-        # plot the final result
-        generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=True)
         #st.pyplot(result)  # Display the plot
 
 if __name__ == "__main__":
