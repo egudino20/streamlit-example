@@ -442,11 +442,12 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     for match in team_dataframes:   
         
         match = match[match['outcomeType'] == 'Successful']
-        match['isOpenPlay'] = np.where((match['passFreekick'] == False) &
+        match.loc[:, 'isOpenPlay'] = np.where((match['passFreekick'] == False) &
                                       ((match['passCorner'] == False)
                                                     ) 
                                                    , 1, 0
                                                    )
+        
         match = match[match['isOpenPlay'] == 1]
         
         match = match[['playerName', 'teamName', 'teamId', 'matchId', 'startDate', 'type', 'x', 'y', 'endX', 'endY', 'xT', 'h_a']]
