@@ -134,10 +134,10 @@ def load_events_df(matches_data):
 def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
 
     # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'Roboto'
+    plt.rcParams['font.family'] = 'sans-serif'
 
-    title_font = 'Roboto'
-    body_font = 'Roboto'
+    title_font = 'sans-serif'
+    body_font = 'sans-serif'
 
     if web_app == True:
 
@@ -181,7 +181,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     ax.axhline(y=0, color='gray', lw=1, linestyle='--', zorder=0)
 
     # Add a legend to the plot with custom font properties and white text color
-    legend_font = fm.FontProperties(family='Roboto', weight='bold')
+    legend_font = fm.FontProperties(family='sans-serif', weight='bold')
     legend = plt.legend(prop=legend_font, loc='upper left', frameon=False)
     plt.setp(legend.texts, color='white')  # Set legend text color to white
 
@@ -523,10 +523,10 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     final_df['team_abbreviation'] = final_df['teamName'].map(team_abbreviations)
 
     # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'Roboto'
+    plt.rcParams['font.family'] = 'sans-serif'
 
-    title_font = 'Roboto'
-    body_font = 'Roboto'
+    title_font = 'sans-serif'
+    body_font = 'sans-serif'
 
     # Define the custom colormap with colors for negative, zero, and positive values
     negative_color = '#ff4500'   # Red for negative values
@@ -693,10 +693,10 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
     clubs = list(teams.teamName.unique())
 
     # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'Roboto'
+    plt.rcParams['font.family'] = 'sans-serif'
 
-    title_font = 'Roboto'
-    body_font = 'Roboto'
+    title_font = 'sans-serif'
+    body_font = 'sans-serif'
 
     if juego_de_po == True:
 
