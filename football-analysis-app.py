@@ -965,7 +965,7 @@ def main():
         team_dataframes = load_individual_match_team_dfs(league_folder, season)
 
         # plot the final result
-        generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=False)
+        generate_match_week_zone_control_viz(team_dataframes, match_week, league, league_folder, season, off_week=True)
         #st.pyplot(result)  # Display the plot
        
 
