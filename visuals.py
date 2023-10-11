@@ -4316,7 +4316,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
 
 import pandas as pd
 
-def process_and_export_match_data(events_df, matches_data, comp, season):
+def process_and_export_match_data(events_df, matches_data, season, comp):
 
     teamNames = []
 
@@ -4366,7 +4366,7 @@ def process_and_export_match_data(events_df, matches_data, comp, season):
         home = team_df.teamName.unique()[0]
         away = team_df.teamName.unique()[1]
         date = team_df.startDate.unique()[0]
-        team_df.to_csv(f'Data/{comp}/{season[5:]}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
+        team_df.to_csv(f'Data/{comp}/{season}/raw-season-data/{home}-{away}-{date}-passes-carries.csv')
         dfs.append(df)
     
     return dfs
