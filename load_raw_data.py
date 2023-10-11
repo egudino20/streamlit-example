@@ -140,6 +140,7 @@ def load_events_df(matches_data):
 
     # Now you have events_df containing data from all matching files
 
+events_df = load_events_df(matches_data)
 
 # export and process match_data through current date; save process and exported dfs to dfs
-dfs = process_and_export_match_data(events_df, matches_data, comp, season)
+dfs = process_and_export_match_data(events_df, matches_data, league_folder, season)
