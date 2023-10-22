@@ -65,7 +65,13 @@ main_url = 'https://1xbet.whoscored.com/'
 
 def getLeagueUrls(minimize_window=True):
     
-    driver = webdriver.Chrome('chromedriver.exe')
+    # Get the absolute path to the ChromeDriver executable
+    chromedriver_path = os.path.abspath('chromedriver.exe')
+
+    # Initialize the ChromeDriver using the absolute path
+    options = webdriver.ChromeOptions()
+    options.binary_location = chromedriver_path  # Set the path to Chrome executable (not the ChromeDriver)
+    driver = webdriver.Chrome(options=options)
     
     if minimize_window:
         driver.minimize_window()
@@ -96,8 +102,14 @@ def getLeagueUrls(minimize_window=True):
       
 def getMatchUrls(comp_urls, competition, season, maximize_window=True):
 
-    driver = webdriver.Chrome('chromedriver.exe')
-    
+    # Get the absolute path to the ChromeDriver executable
+    chromedriver_path = os.path.abspath('chromedriver.exe')
+
+    # Initialize the ChromeDriver using the absolute path
+    options = webdriver.ChromeOptions()
+    options.binary_location = chromedriver_path  # Set the path to Chrome executable (not the ChromeDriver)
+    driver = webdriver.Chrome(options=options)
+        
     if maximize_window:
         driver.maximize_window()
     
@@ -214,7 +226,13 @@ def getMatchesData(match_urls, minimize_window=True):
     
     matches = []
     
-    driver = webdriver.Chrome('chromedriver.exe')
+    # Get the absolute path to the ChromeDriver executable
+    chromedriver_path = os.path.abspath('chromedriver.exe')
+
+    # Initialize the ChromeDriver using the absolute path
+    options = webdriver.ChromeOptions()
+    options.binary_location = chromedriver_path  # Set the path to Chrome executable (not the ChromeDriver)
+    driver = webdriver.Chrome(options=options)
     if minimize_window:
         driver.minimize_window()
     

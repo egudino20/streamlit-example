@@ -2,20 +2,6 @@
 import pandas as pd
 import numpy as np
 
-# data visualization
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-from mplsoccer import Pitch, VerticalPitch, FontManager
-import matplotlib.colors as mcolors
-from matplotlib.colors import to_rgba
-from matplotlib.patches import ConnectionPatch
-import matplotlib.gridspec as gridspec
-import seaborn as sns
-from matplotlib.colors import LinearSegmentedColormap, ListedColormap
-import matplotlib.image as mpimg
-import matplotlib.ticker as ticker
-import matplotlib.patheffects as path_effects
-
 # web scraping
 from selenium import webdriver
 
@@ -35,8 +21,6 @@ import pickle
 # embedded packages
 import main
 from main import insert_ball_carries
-import visuals
-from visuals import progressive_pass, progressive_carry, pass_into_box, carry_into_box
 
 # file handling and parsing
 import os
