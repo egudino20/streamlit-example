@@ -133,11 +133,11 @@ def load_events_df(matches_data):
 
 def team_performance(team, comp, season, league, metric_1, metric_2, web_app=False):
 
-    # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'sans-serif'
+    # Assuming the "DejaVu Sans" font is installed on your system, you can specify it as the default font family.
+    plt.rcParams['font.family'] = 'DejaVu Sans'
 
-    title_font = 'sans-serif'
-    body_font = 'sans-serif'
+    title_font = 'DejaVu Sans'
+    body_font = 'DejaVu Sans'
 
     if web_app == True:
 
@@ -150,7 +150,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     df['yrAvg'] = df[metric_1].rolling(window=10).mean()
     df['zrAvg'] = df[metric_2].rolling(window=10).mean()
 
-    background = '#1d2849'
+    background = '#60687F'
     text_color='w'
     text_color_2='gray'
     mpl.rcParams['xtick.color'] = text_color
@@ -181,7 +181,7 @@ def team_performance(team, comp, season, league, metric_1, metric_2, web_app=Fal
     ax.axhline(y=0, color='gray', lw=1, linestyle='--', zorder=0)
 
     # Add a legend to the plot with custom font properties and white text color
-    legend_font = fm.FontProperties(family='sans-serif', weight='bold')
+    legend_font = fm.FontProperties(family='DejaVu Sans', weight='bold')
     legend = plt.legend(prop=legend_font, loc='upper left', frameon=False)
     plt.setp(legend.texts, color='white')  # Set legend text color to white
 
@@ -524,15 +524,15 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     # Add a new column 'team_abbreviation' using the mapping
     final_df['team_abbreviation'] = final_df['teamName'].map(team_abbreviations)
 
-    # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'sans-serif'
+    # Assuming the "DejaVu Sans" font is installed on your system, you can specify it as the default font family.
+    plt.rcParams['font.family'] = 'DejaVu Sans'
 
-    title_font = 'sans-serif'
-    body_font = 'sans-serif'
+    title_font = 'DejaVu Sans'
+    body_font = 'DejaVu Sans'
 
     # Define the custom colormap with colors for negative, zero, and positive values
     negative_color = '#ff4500'   # Red for negative values
-    zero_color = '#1d2849'        # Dark blue for zero values
+    zero_color = '#60687F'        # Dark blue for zero values
     positive_color = '#39ff14'    # Green for positive values
 
     colors = [(negative_color), (zero_color), (positive_color)]
@@ -560,7 +560,7 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     match_ids_list = match_ids_list[start_index:end_index]
 
     # Setup the pitch
-    pitch = VerticalPitch(pitch_type='opta', pitch_color='#1d2849', line_color='w', line_zorder=5,
+    pitch = VerticalPitch(pitch_type='opta', pitch_color='#60687F', line_color='w', line_zorder=5,
                           half=False, pad_top=2, axis=False, 
                           positional=True, positional_color='#eadddd', positional_zorder=5)
 
@@ -569,7 +569,7 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
                           endnote_height=0.01, endnote_space=0.01,
                           axis=False, space=0.1,
                           title_height=0.04, grid_height=0.84)
-    fig.set_facecolor('#1d2849')
+    fig.set_facecolor('#60687F')
 
     # Set the title
     title = f"Match Week {match_week} - Zone Control"
@@ -694,17 +694,17 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
 
     clubs = list(teams.teamName.unique())
 
-    # Assuming the "Roboto" font is installed on your system, you can specify it as the default font family.
-    plt.rcParams['font.family'] = 'sans-serif'
+    # Assuming the "DejaVu Sans" font is installed on your system, you can specify it as the default font family.
+    plt.rcParams['font.family'] = 'DejaVu Sans'
 
-    title_font = 'sans-serif'
-    body_font = 'sans-serif'
+    title_font = 'DejaVu Sans'
+    body_font = 'DejaVu Sans'
 
     if juego_de_po == True:
 
         # Define the custom colormap with colors for negative, zero, and positive values
         negative_color = '#ff4500'   # Red for negative values
-        zero_color = '#1d2849'        # Dark blue for zero values
+        zero_color = '#60687F'        # Dark blue for zero values
         positive_color = '#39ff14'    # Green for positive values
 
         colors = [(negative_color), (zero_color), (positive_color)]
@@ -715,7 +715,7 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
 
         # Set up the custom colormap with different shades for negative, zero, and positive values
         negative_color = '#ff4500'
-        central_color = '#1d2849'
+        central_color = '#60687F'
         positive_color = '#39ff14'
 
         n_bins = 256  # Number of color bins
@@ -730,14 +730,14 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
     if juego_de_po == True:
 
         # Setup the pitch
-        pitch = VerticalPitch(pitch_type='opta', pitch_color='#1d2849', line_color='w', line_zorder=5,
+        pitch = VerticalPitch(pitch_type='opta', pitch_color='#60687F', line_color='w', line_zorder=5,
                             half=False, pad_top=2, axis=False, 
                             positional=True, positional_color='#eadddd', positional_zorder=5)
     
     else:
     
         # Setup the pitch
-        pitch = VerticalPitch(pitch_type='opta', pitch_color='#1d2849', line_color='w', line_zorder=5,
+        pitch = VerticalPitch(pitch_type='opta', pitch_color='#60687F', line_color='w', line_zorder=5,
                             half=False, pad_top=2, axis=False, 
                             positional=True, positional_color='#eadddd', positional_zorder=5)
 
@@ -746,7 +746,7 @@ def generate_all_teams_zone_control(matches_data, league, final_club_dfs, comp, 
                         endnote_height=0.01, endnote_space=0.01,
                         axis=False, space=0.1,
                         title_height=0.08, grid_height=0.84)
-    fig.set_facecolor('#1d2849')
+    fig.set_facecolor('#60687F')
 
     # Set the title
     title = f"Match Zone Control"
