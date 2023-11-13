@@ -531,9 +531,9 @@ def generate_match_week_zone_control_viz(team_dataframes, match_week, league, co
     body_font = 'DejaVu Sans'
 
     # Define the custom colormap with colors for negative, zero, and positive values
-    negative_color = '#ff4500'   # Red for negative values
+    positive_color = '#ff4500'   # Red for negative values
     zero_color = '#333d5b'        # Dark blue for zero values
-    positive_color = '#39ff14'    # Green for positive values
+    negative_color = '#39ff14'    # Green for positive values
 
     colors = [(negative_color), (zero_color), (positive_color)]
     n_bins = 100  # Number of color bins
